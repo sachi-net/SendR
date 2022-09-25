@@ -18,7 +18,7 @@ namespace SimplySoft.Core.Test.ConsoleUI
                 INotificationCollection notification = new NotificationCollection();
 
                 var dataMs = new { Name = "Sachintha Outlook", Age = 29, IsMarried = false };
-                EmailMessage.Create("send-wish0", "netsachintha@outlook.com", dataMs).Result.AddTo(notification);
+                EmailMessage.Create("send-wish", "netsachintha@outlook.com", dataMs).Result.AddTo(notification);
 
                 var dataGm = new { Name = "Sachintha Gmail", Age = 29, IsMarried = false };
                 EmailMessage.Create("send-wish", "netsachintha@gmail.com", dataGm).Result.AddTo(notification);
