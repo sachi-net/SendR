@@ -1,0 +1,1 @@
+# SendR.Core
