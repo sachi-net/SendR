@@ -36,7 +36,7 @@ namespace SimplySoft.Core.SendR
                 throw new ApplicationException(Messages.CONFIGURATION_ERROR);
             }
 
-            var section = "SendR.Notification:Email";
+            var section = "SendR:Notification:Email";
 
             EmailMessage.Settings = new EmailSettings
             {

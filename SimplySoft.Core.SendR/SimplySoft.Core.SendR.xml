@@ -383,12 +383,14 @@
             <summary>
             Send all notifications saved in the current collection to their specified recipients.
             </summary>
+            <remarks>The notification collection will be cleared after this method call.</remarks>
         </member>
         <member name="M:SimplySoft.Core.SendR.NotificationCollection.SendAllAsync">
             <summary>
             Send all notifications added to the current collection to their specified recipients asynchronously.
             </summary>
             <returns>Awaitable <see cref="T:System.Threading.Tasks.Task"/> as the result of this operation.</returns>
+            <remarks>The notification collection will be cleared after this method call.</remarks>
         </member>
         <member name="T:SimplySoft.Core.SendR.SendRConfigurationBuilder">
             <summary>
@@ -441,7 +443,7 @@
             <param name="configuration">The <see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/> where the service options are stored.</param>
             <returns><see cref="T:SimplySoft.Core.SendR.SendRConfigurationBuilder"/> that can be used to further configure SendR services.</returns>
             <remarks>Use <c>Build()</c> after configuring all SendR services in order to 
-            allow futher chaning other services into this <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.</remarks>
+            allow further chaining other services into this <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.</remarks>
         </member>
     </members>
 </doc>

@@ -16,7 +16,7 @@ namespace SendR
         /// <param name="configuration">The <see cref="IConfiguration"/> where the service options are stored.</param>
         /// <returns><see cref="SendRConfigurationBuilder"/> that can be used to further configure SendR services.</returns>
         /// <remarks>Use <c>Build()</c> after configuring all SendR services in order to 
-        /// allow futher chaning other services into this <see cref="IServiceCollection"/>.</remarks>
+        /// allow further chaining other services into this <see cref="IServiceCollection"/>.</remarks>
         public static SendRConfigurationBuilder ConfigureSendRNotifications(this IServiceCollection services, IConfiguration configuration)
         {
             var configurationBuilder = new SendRConfigurationBuilder(configuration, services);

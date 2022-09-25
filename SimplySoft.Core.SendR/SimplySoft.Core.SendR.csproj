@@ -11,6 +11,8 @@
     <PackageTags>SendR, Notification, Email, Message</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageIcon>sendr.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -22,7 +24,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\..\..\..\Desktop\sendr.png">
+    <None Remove="sendr.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="sendr.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
