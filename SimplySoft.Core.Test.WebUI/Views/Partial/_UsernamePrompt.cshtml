@@ -1,0 +1,12 @@
+﻿@model SimplySoft.Core.Test.WebUI.Models.StartModel
+
+<div class="animate__animated animate__fadeInRight animate__fast">
+    <div>
+        <label asp-for="UsernamePrompt.Username" class="form-label"></label>
+        <input asp-for="UsernamePrompt.Username" type="text" class="form-control form-control-sm" placeholder="user" />
+        <span asp-validation-for="UsernamePrompt.Username" class="text-danger"></span>
+    </div>
+    <div class="right">
+        <input class="btn btn-sm btn-primary" type="submit" value="Next" />
+    </div>
+</div>

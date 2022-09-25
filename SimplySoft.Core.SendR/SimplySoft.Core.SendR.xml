@@ -1,0 +1,447 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SimplySoft.Core.SendR</name>
+    </assembly>
+    <members>
+        <member name="T:SimplySoft.Core.SendR.Email.EmailMessage">
+            <summary>
+            Provide Email service with SendR notification subsystem.
+            </summary>
+        </member>
+        <member name="P:SimplySoft.Core.SendR.Email.EmailMessage.To">
+            <summary>
+            Get all recipients (To) of this <see cref="T:SimplySoft.Core.SendR.Email.EmailMessage"/> as a <see cref="T:System.Net.Mail.MailAddressCollection"/>.
+            </summary>
+        </member>
+        <member name="P:SimplySoft.Core.SendR.Email.EmailMessage.Cc">
+            <summary>
+            Get all carbon copied recipients (CC) of this <see cref="T:SimplySoft.Core.SendR.Email.EmailMessage"/> as a <see cref="T:System.Net.Mail.MailAddressCollection"/>.
+            </summary>
+        </member>
+        <member name="P:SimplySoft.Core.SendR.Email.EmailMessage.Bcc">
+            <summary>
+            Get all blind carbon copied recipients (BCC) of this <see cref="T:SimplySoft.Core.SendR.Email.EmailMessage"/> as a <see cref="T:System.Net.Mail.MailAddressCollection"/>.
+            </summary>
+        </member>
+        <member name="P:SimplySoft.Core.SendR.Email.EmailMessage.Subject">
+            <summary>
+            Get or set the subject of this <see cref="T:SimplySoft.Core.SendR.Email.EmailMessage"/>.
+            </summary>
+        </member>
+        <member name="P:SimplySoft.Core.SendR.Email.EmailMessage.Message">
+            <summary>
+            Get the message body of this <see cref="T:SimplySoft.Core.SendR.Email.EmailMessage"/>.
+            </summary>
+        </member>
+        <member name="M:SimplySoft.Core.SendR.Email.EmailMessage.Create(System.String,System.String,System.String)">
+            <summary>
+            Create an instance of <see cref="T:SimplySoft.Core.SendR.Email.EmailMessage"/> addressed to a single recipient. This does not use HTML rendering in message body.
+            </summary>
+            <param name="to">Address of the recipient where this <see cref="T:SimplySoft.Core.SendR.Email.EmailMessage"/> is about to sent.</param>
+            <param name="subject">Subject associated with this <see cref="T:SimplySoft.Core.SendR.Email.EmailMessage"/>.</param>
+            <param name="message">Body of this <see cref="T:SimplySoft.Core.SendR.Email.EmailMessage"/>.</param>
+            <returns>An instance of <see cref="T:SimplySoft.Core.SendR.Email.EmailMessage"/> with configured setup.</returns>
+        </member>
+        <member name="M:SimplySoft.Core.SendR.Email.EmailMessage.Create(System.String,System.String,System.Object)">
+            <summary>
+            Create an instance of <see cref="T:SimplySoft.Core.SendR.Email.EmailMessage"/> using a defined template addressed to a single recipient. 
+            This uses HTML rendering in message body.
+            </summary>
+            <param name="templateName"></param>
+            <param name="to">Address of the recipient where this <see cref="T:SimplySoft.Core.SendR.Email.EmailMessage"/> is about to sent.</param>
+            <param name="data"><see langword="dynamic"/> data model to bind with the message body of this <see cref="T:SimplySoft.Core.SendR.Email.EmailMessage"/>.
+            <br/>This parameter is optional.</param>
+            <returns>An instance of <see cref="T:SimplySoft.Core.SendR.Email.EmailMessage"/> with configured setup as an awaitable <see cref="T:System.Threading.Tasks.Task"/>.</returns>
+            <exception cref="T:SimplySoft.Core.SendR.Exceptions.TemplateNotDefinedException">Throws when there is no <see cref="T:SimplySoft.Core.SendR.Email.Models.EmailTemplate"/> found by the <paramref name="templateName"/> in 
+            the registered template collection.</exception>
+            <exception cref="T:System.IO.FileNotFoundException">Throws when there is no reference file found by the <see cref="P:SimplySoft.Core.SendR.Email.Models.EmailTemplate.Path"/>.</exception>
+        </member>
+        <member name="M:SimplySoft.Core.SendR.Email.EmailMessage.Create(System.String,System.Collections.Generic.IEnumerable{System.Net.Mail.MailAddress},System.Object,System.Collections.Generic.IEnumerable{System.Net.Mail.MailAddress},System.Collections.Generic.IEnumerable{System.Net.Mail.MailAddress})">
+            <summary>
+            Create an instance of <see cref="T:SimplySoft.Core.SendR.Email.EmailMessage"/> using a defined template addressed to a list of <paramref name="to"/>, <paramref name="cc"/> and 
+            <paramref name="bcc"/> recipients. This uses HTML rendering in message body.
+            </summary>
+            <param name="templateName">Name of the Email template registered with <see cref="T:SimplySoft.Core.SendR.Email.Models.EmailOptions"/>.</param>
+            <param name="to">Address list of recipients where this <see cref="T:SimplySoft.Core.SendR.Email.EmailMessage"/> is about to sent.</param>
+            <param name="data"><see langword="dynamic"/> data model to bind with the message body of this <see cref="T:SimplySoft.Core.SendR.Email.EmailMessage"/>.
+            <br/>This parameter is optional.</param>
+            <param name="cc">Address list of carbon copied recipients where this <see cref="T:SimplySoft.Core.SendR.Email.EmailMessage"/> is about to forward.</param>
+            <param name="bcc">Address list of blind carbon copied recipients where this <see cref="T:SimplySoft.Core.SendR.Email.EmailMessage"/> is about to forward.</param>
+            <returns>An instance of <see cref="T:SimplySoft.Core.SendR.Email.EmailMessage"/> with configured setup as an awaitable <see cref="T:System.Threading.Tasks.Task"/>.</returns>
+            <exception cref="T:SimplySoft.Core.SendR.Exceptions.ServiceNotConfiguredException">Throws when SendR notification is not configured use Email service.</exception>
+            <exception cref="T:SimplySoft.Core.SendR.Exceptions.TemplateNotDefinedException">Throws when there is no <see cref="T:SimplySoft.Core.SendR.Email.Models.EmailTemplate"/> found by the <paramref name="templateName"/> in 
+            the registered template collection.</exception>
+            <exception cref="T:System.IO.FileNotFoundException">Throws when there is no reference file found by the <see cref="P:SimplySoft.Core.SendR.Email.Models.EmailTemplate.Path"/>.</exception>
+        </member>
+        <member name="M:SimplySoft.Core.SendR.Email.EmailMessage.Create(System.Collections.Generic.IEnumerable{System.Net.Mail.MailAddress},System.String,System.String,System.Collections.Generic.IEnumerable{System.Net.Mail.MailAddress},System.Collections.Generic.IEnumerable{System.Net.Mail.MailAddress},System.Boolean)">
+            <summary>
+            Create an instance of <see cref="T:SimplySoft.Core.SendR.Email.EmailMessage"/> addressed to a list of <paramref name="to"/>, <paramref name="cc"/> and 
+            <paramref name="bcc"/> recipients.
+            </summary>
+            <param name="to">Address list of recipients where this <see cref="T:SimplySoft.Core.SendR.Email.EmailMessage"/> is about to sent.</param>
+            <param name="subject">Subject associated with this <see cref="T:SimplySoft.Core.SendR.Email.EmailMessage"/>.</param>
+            <param name="message">Body of this <see cref="T:SimplySoft.Core.SendR.Email.EmailMessage"/>.</param>
+            <param name="cc">Address list of carbon copied recipients where this <see cref="T:SimplySoft.Core.SendR.Email.EmailMessage"/> is about to forward.</param>
+            <param name="bcc">Address list of blind carbon copied recipients where this <see cref="T:SimplySoft.Core.SendR.Email.EmailMessage"/> is about to forward.</param>
+            <param name="useHtml">Whether to use HTML rendered body for this <see cref="T:SimplySoft.Core.SendR.Email.EmailMessage"/>. Default is set to <see langword="false"/>.</param>
+            <returns>An instance of <see cref="T:SimplySoft.Core.SendR.Email.EmailMessage"/> with configured setup.</returns>
+            <exception cref="T:SimplySoft.Core.SendR.Exceptions.ServiceNotConfiguredException">Throws when SendR notification is not configured use Email service.</exception>
+        </member>
+        <member name="M:SimplySoft.Core.SendR.Email.EmailMessage.AddTo(SimplySoft.Core.SendR.INotificationCollection)">
+            <summary>
+            Add this <see cref="T:SimplySoft.Core.SendR.Email.EmailMessage"/> to the provided <see cref="T:SimplySoft.Core.SendR.INotificationCollection"/>.
+            </summary>
+            <param name="notifications"><see cref="T:SimplySoft.Core.SendR.INotificationCollection"/> in which this <see cref="T:SimplySoft.Core.SendR.Email.EmailMessage"/> is added into.</param>
+        </member>
+        <member name="M:SimplySoft.Core.SendR.Email.EmailMessage.Send">
+            <summary>
+            Send this <see cref="T:SimplySoft.Core.SendR.Email.EmailMessage"/> to the specified recipients.
+            </summary>
+            <exception cref="T:SimplySoft.Core.SendR.Exceptions.ServiceNotConfiguredException">Throws when SendR notification is not configured use Email service.</exception>
+            <exception cref="T:SimplySoft.Core.SendR.Exceptions.NotificationNotSentException">Throws when SendR failed to send this <see cref="T:SimplySoft.Core.SendR.Email.EmailMessage"/>.</exception>
+        </member>
+        <member name="M:SimplySoft.Core.SendR.Email.EmailMessage.SendAsync">
+            <summary>
+            Send this <see cref="T:SimplySoft.Core.SendR.Email.EmailMessage"/> to the specified recipients asynchronously.
+            </summary>
+            <returns>Awaitable <see cref="T:System.Threading.Tasks.Task"/> as the result of this operation.</returns>
+            <exception cref="T:SimplySoft.Core.SendR.Exceptions.ServiceNotConfiguredException">Throws when SendR notification is not configured use Email service.</exception>
+            <exception cref="T:SimplySoft.Core.SendR.Exceptions.NotificationNotSentException">Throws when SendR failed to send this <see cref="T:SimplySoft.Core.SendR.Email.EmailMessage"/>.</exception>
+        </member>
+        <member name="T:SimplySoft.Core.SendR.Email.Models.EmailOptions">
+            <summary>
+            SendR Email service configuration options.
+            </summary>
+        </member>
+        <member name="P:SimplySoft.Core.SendR.Email.Models.EmailOptions.Host">
+            <summary>
+            The SMTP host name or IP address.
+            </summary>
+        </member>
+        <member name="P:SimplySoft.Core.SendR.Email.Models.EmailOptions.Port">
+            <summary>
+            The port number of SMTP endpoint.
+            </summary>
+        </member>
+        <member name="P:SimplySoft.Core.SendR.Email.Models.EmailOptions.Username">
+            <summary>
+            Username of the sender to authenticate SMTP communication.
+            </summary>
+        </member>
+        <member name="P:SimplySoft.Core.SendR.Email.Models.EmailOptions.Password">
+            <summary>
+            Password of the sender to authenticate SMTP communication.
+            </summary>
+        </member>
+        <member name="P:SimplySoft.Core.SendR.Email.Models.EmailOptions.BusinessName">
+            <summary>
+            Display name to associated with this Username to be shown in email client application.
+            </summary>
+        </member>
+        <member name="P:SimplySoft.Core.SendR.Email.Models.EmailOptions.TimeOut">
+            <summary>
+            The timeout period (in milliseconds) to wait during SMTP transaction. Default value is 10000ms (or 100s).
+            </summary>
+        </member>
+        <member name="P:SimplySoft.Core.SendR.Email.Models.EmailOptions.EnableSsl">
+            <summary>
+            Whether to use SSL (Secure Socket Layer) encryption while communicating with this SMTP server.
+            </summary>
+        </member>
+        <member name="P:SimplySoft.Core.SendR.Email.Models.EmailOptions.SendingFailedFallbackMode">
+            <summary>
+            Set the fallback ation type when failing to send an email. The default is set to <see cref="F:SimplySoft.Core.SendR.Enumerators.FallbackActionMode.ThrowException"/>.
+            </summary>
+        </member>
+        <member name="P:SimplySoft.Core.SendR.Email.Models.EmailOptions.SendingFailedFallback">
+            <summary>
+            Fallback action to perform after failed to send an email. This action will only invoked if the <see cref="P:SimplySoft.Core.SendR.Email.Models.EmailOptions.SendingFailedFallbackMode"/> 
+            is set to <see cref="F:SimplySoft.Core.SendR.Enumerators.FallbackActionMode.ExecuteAction"/>.
+            </summary>
+        </member>
+        <member name="M:SimplySoft.Core.SendR.Email.Models.EmailOptions.AddTemplate(System.String,System.String,System.String)">
+            <summary>
+            Add custom email template with specified <paramref name="name"/>, <paramref name="subject"/> and <paramref name="templatePath"/>.
+            </summary>
+            <param name="name">Name of the template. Name must be unique.</param>
+            <param name="subject">Email subject associated with this template.</param>
+            <param name="templatePath">Absolute path reference to the template file.</param>
+            <exception cref="T:System.ArgumentException">Throws when template name is null or empty.</exception>
+            <exception cref="T:SimplySoft.Core.SendR.Exceptions.DuplicateTemplateException">Throws when a template with this name is already defined.</exception>
+        </member>
+        <member name="M:SimplySoft.Core.SendR.Email.Models.EmailOptions.AddTemplate(SimplySoft.Core.SendR.Email.Models.EmailTemplate)">
+            <summary>
+            Add custom email template with specified <see cref="T:SimplySoft.Core.SendR.Email.Models.EmailTemplate"/> object.
+            </summary>
+            <param name="emailTemplate">Email template to be added.</param>
+            <exception cref="T:System.ArgumentException">Throws when template name is null or empty.</exception>
+            <exception cref="T:SimplySoft.Core.SendR.Exceptions.DuplicateTemplateException">Throws when a template with this name is already defined.</exception>
+        </member>
+        <member name="T:SimplySoft.Core.SendR.Email.Models.EmailTemplate">
+            <summary>
+            Define a custom email template with dynamic data binding ability.
+            </summary>
+        </member>
+        <member name="P:SimplySoft.Core.SendR.Email.Models.EmailTemplate.Name">
+            <summary>
+            Name of the custom template. Name must be unique.
+            </summary>
+        </member>
+        <member name="P:SimplySoft.Core.SendR.Email.Models.EmailTemplate.Subject">
+            <summary>
+            Email subject associated with this email template.
+            </summary>
+        </member>
+        <member name="P:SimplySoft.Core.SendR.Email.Models.EmailTemplate.Path">
+            <summary>
+            Absolute path reference to the template file.
+            </summary>
+        </member>
+        <member name="M:SimplySoft.Core.SendR.Email.Models.EmailTemplate.Equals(SimplySoft.Core.SendR.Email.Models.EmailTemplate)">
+            <summary>
+            Determine whether this template is equal to the provided <see cref="T:SimplySoft.Core.SendR.Email.Models.EmailTemplate"/>.
+            </summary>
+            <param name="other">Other <see cref="T:SimplySoft.Core.SendR.Email.Models.EmailTemplate"/> object to be compared with.</param>
+            <returns>Returns <see langword="true"/> if the name of these templates are same or otherwise <see langword="false"/>.</returns>
+        </member>
+        <member name="T:SimplySoft.Core.SendR.Enumerators.FallbackActionMode">
+            <summary>
+            Fallback action type to handle a failure when performing SendR transaction.
+            </summary>
+        </member>
+        <member name="F:SimplySoft.Core.SendR.Enumerators.FallbackActionMode.Ignore">
+            <summary>
+            Ignore the underlying failure and try to proceed forward.
+            </summary>
+        </member>
+        <member name="F:SimplySoft.Core.SendR.Enumerators.FallbackActionMode.ThrowException">
+            <summary>
+            Throw an exception on a failure of SendR transaction.
+            </summary>
+        </member>
+        <member name="F:SimplySoft.Core.SendR.Enumerators.FallbackActionMode.ExecuteAction">
+            <summary>
+            Invoke the provided action on a failure of SendR transaction. This requires to setup a
+            fallback action into <see cref="P:SimplySoft.Core.SendR.Email.Models.EmailOptions.SendingFailedFallback"/> action delegate.
+            </summary>
+        </member>
+        <member name="T:SimplySoft.Core.SendR.Exceptions.DuplicateTemplateException">
+            <summary>
+            The exception that is thrown when there are duplicate templates found in the same template collection.
+            </summary>
+        </member>
+        <member name="M:SimplySoft.Core.SendR.Exceptions.DuplicateTemplateException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:SimplySoft.Core.SendR.Exceptions.DuplicateTemplateException"/> class.
+            </summary>
+        </member>
+        <member name="M:SimplySoft.Core.SendR.Exceptions.DuplicateTemplateException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SimplySoft.Core.SendR.Exceptions.DuplicateTemplateException"/> class with a specified error message.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+        </member>
+        <member name="M:SimplySoft.Core.SendR.Exceptions.DuplicateTemplateException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SimplySoft.Core.SendR.Exceptions.DuplicateTemplateException"/> class with a specified
+            error message and a reference to the inner exception that is the cause of this exception.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="inner">The exception that is the cause of the current exception.</param>
+        </member>
+        <member name="T:SimplySoft.Core.SendR.Exceptions.NotificationNotSentException">
+            <summary>
+            The exception that is thrown when the SendR notification is failed in sending.
+            </summary>
+        </member>
+        <member name="M:SimplySoft.Core.SendR.Exceptions.NotificationNotSentException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:SimplySoft.Core.SendR.Exceptions.NotificationNotSentException"/> class.
+            </summary>
+        </member>
+        <member name="M:SimplySoft.Core.SendR.Exceptions.NotificationNotSentException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SimplySoft.Core.SendR.Exceptions.NotificationNotSentException"/> class with a specified error message.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+        </member>
+        <member name="M:SimplySoft.Core.SendR.Exceptions.NotificationNotSentException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SimplySoft.Core.SendR.Exceptions.NotificationNotSentException"/> class with a specified
+            error message and a reference to the inner exception that is the cause of this exception.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="inner">The exception that is the cause of the current exception.</param>
+        </member>
+        <member name="T:SimplySoft.Core.SendR.Exceptions.ServiceNotConfiguredException">
+            <summary>
+            The exception that is thrown when tries to use a SendR service before it is registered as a dependency.
+            </summary>
+        </member>
+        <member name="M:SimplySoft.Core.SendR.Exceptions.ServiceNotConfiguredException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:SimplySoft.Core.SendR.Exceptions.ServiceNotConfiguredException"/> class.
+            </summary>
+        </member>
+        <member name="M:SimplySoft.Core.SendR.Exceptions.ServiceNotConfiguredException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SimplySoft.Core.SendR.Exceptions.ServiceNotConfiguredException"/> class with a specified error message.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+        </member>
+        <member name="M:SimplySoft.Core.SendR.Exceptions.ServiceNotConfiguredException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SimplySoft.Core.SendR.Exceptions.DuplicateTemplateException"/> class with a specified
+            error message and a reference to the inner exception that is the cause of this exception.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="inner">The exception that is the cause of the current exception.</param>
+        </member>
+        <member name="T:SimplySoft.Core.SendR.Exceptions.TemplateNotDefinedException">
+            <summary>
+            The exception that is thrown when the template is not found in template collection.
+            </summary>
+        </member>
+        <member name="M:SimplySoft.Core.SendR.Exceptions.TemplateNotDefinedException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:SimplySoft.Core.SendR.Exceptions.TemplateNotDefinedException"/> class.
+            </summary>
+        </member>
+        <member name="M:SimplySoft.Core.SendR.Exceptions.TemplateNotDefinedException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SimplySoft.Core.SendR.Exceptions.TemplateNotDefinedException"/> class with a specified error message.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+        </member>
+        <member name="M:SimplySoft.Core.SendR.Exceptions.TemplateNotDefinedException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:SimplySoft.Core.SendR.Exceptions.TemplateNotDefinedException"/> class with a specified
+            error message and a reference to the inner exception that is the cause of this exception.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="inner">The exception that is the cause of the current exception.</param>
+        </member>
+        <member name="T:SimplySoft.Core.SendR.INotificationCollection">
+            <summary>
+            Define SendR notification collection which allows to perform batch-tasks against multiple notification definitions.
+            </summary>
+        </member>
+        <member name="M:SimplySoft.Core.SendR.INotificationCollection.Add(SimplySoft.Core.SendR.INotificationSendable)">
+            <summary>
+            Add the provided <see cref="T:SimplySoft.Core.SendR.INotificationSendable"/> into this <see cref="T:SimplySoft.Core.SendR.INotificationCollection"/>.
+            </summary>
+            <param name="notification">The <see cref="T:SimplySoft.Core.SendR.INotificationSendable"/> to be added into the collection.</param>
+        </member>
+        <member name="M:SimplySoft.Core.SendR.INotificationCollection.SendAll">
+            <summary>
+            Send all notifications saved in the current collection to their specified recipients.
+            </summary>
+        </member>
+        <member name="M:SimplySoft.Core.SendR.INotificationCollection.SendAllAsync">
+            <summary>
+            Send all notifications added to the current collection to their specified recipients asynchronously.
+            </summary>
+            <returns>Awaitable <see cref="T:System.Threading.Tasks.Task"/> as the result of this operation.</returns>
+        </member>
+        <member name="T:SimplySoft.Core.SendR.INotificationSendable">
+            <summary>
+            Defines SendR notification actions that other built-in or custom notifications classes implement to work 
+            with <see cref="T:SimplySoft.Core.SendR.INotificationCollection"/>.
+            </summary>
+        </member>
+        <member name="M:SimplySoft.Core.SendR.INotificationSendable.AddTo(SimplySoft.Core.SendR.INotificationCollection)">
+            <summary>
+            Add this <see cref="T:SimplySoft.Core.SendR.INotificationSendable"/> to the provided <see cref="T:SimplySoft.Core.SendR.INotificationCollection"/>.
+            </summary>
+            <param name="notifications"><see cref="T:SimplySoft.Core.SendR.INotificationCollection"/> in which this <see cref="T:SimplySoft.Core.SendR.INotificationSendable"/> 
+            is added into.</param>
+        </member>
+        <member name="M:SimplySoft.Core.SendR.INotificationSendable.Send">
+            <summary>
+            Send this <see cref="T:SimplySoft.Core.SendR.INotificationSendable"/> to the specified recipients.
+            </summary>
+        </member>
+        <member name="M:SimplySoft.Core.SendR.INotificationSendable.SendAsync">
+            <summary>
+            Send this <see cref="T:SimplySoft.Core.SendR.INotificationSendable"/> to the specified recipients asynchronoulsy.
+            </summary>
+            <returns>Awaitable <see cref="T:System.Threading.Tasks.Task"/> as the result of this operation.</returns>
+        </member>
+        <member name="T:SimplySoft.Core.SendR.NotificationCollection">
+            <summary>
+            Define SendR notification collection which allows to perform batch-tasks against multiple notification definitions.
+            </summary>
+        </member>
+        <member name="M:SimplySoft.Core.SendR.NotificationCollection.Add(SimplySoft.Core.SendR.INotificationSendable)">
+            <summary>
+            Add the provided <see cref="T:SimplySoft.Core.SendR.INotificationSendable"/> into this <see cref="T:SimplySoft.Core.SendR.NotificationCollection"/>.
+            </summary>
+            <param name="notification">The <see cref="T:SimplySoft.Core.SendR.INotificationSendable"/> to be added into the collection.</param>
+        </member>
+        <member name="M:SimplySoft.Core.SendR.NotificationCollection.SendAll">
+            <summary>
+            Send all notifications saved in the current collection to their specified recipients.
+            </summary>
+        </member>
+        <member name="M:SimplySoft.Core.SendR.NotificationCollection.SendAllAsync">
+            <summary>
+            Send all notifications added to the current collection to their specified recipients asynchronously.
+            </summary>
+            <returns>Awaitable <see cref="T:System.Threading.Tasks.Task"/> as the result of this operation.</returns>
+        </member>
+        <member name="T:SimplySoft.Core.SendR.SendRConfigurationBuilder">
+            <summary>
+            SendR service configuration builder with related settings and options.
+            </summary>
+        </member>
+        <member name="M:SimplySoft.Core.SendR.SendRConfigurationBuilder.AddEmail">
+            <summary>
+            Add Email notification facility with SendR notification subsystem by pre-configured options from <see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/>.
+            </summary>
+            <returns><see cref="T:SimplySoft.Core.SendR.SendRConfigurationBuilder"/> that can be used to further configure SendR services.</returns>
+            <exception cref="T:System.ApplicationException">Throws when the provided <see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/> is not defined.</exception>
+            <remarks>Use <c>Build()</c> after configuring all SendR services in order to 
+            allow further chaining other services into this <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.</remarks>
+        </member>
+        <member name="M:SimplySoft.Core.SendR.SendRConfigurationBuilder.AddEmail(System.Action{SimplySoft.Core.SendR.Email.Models.EmailOptions})">
+            <summary>
+            Add Email notification facility with SendR notification subsystem by manual <see cref="T:SimplySoft.Core.SendR.Email.Models.EmailOptions"/> configuration settings.
+            The added options override the configurations from <see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/>.
+            </summary>
+            <param name="setupAction">Configuration setup action with <see cref="T:SimplySoft.Core.SendR.Email.Models.EmailOptions"/>.</param>
+            <returns><see cref="T:SimplySoft.Core.SendR.SendRConfigurationBuilder"/> that can be used to further configure SendR services.</returns>
+            <remarks>Use <c>Build()</c> after configuring all SendR services in order to 
+            allow further chaining other services into this <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.</remarks>
+        </member>
+        <member name="M:SimplySoft.Core.SendR.SendRConfigurationBuilder.Build">
+            <summary>
+            Finalize SendR notification service configuration and preserve the ability to further chaining other services 
+            into this <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.
+            </summary>
+            <returns><see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> after configured SendR services.</returns>
+        </member>
+        <member name="M:SimplySoft.Core.SendR.SendRConfigurationBuilder.ConfigureEmailService(System.Action{SimplySoft.Core.SendR.Email.Models.EmailOptions})">
+            <summary>
+            Configure Email notification facility with SendR notification subsystem with provided <see cref="T:SimplySoft.Core.SendR.Email.Models.EmailOptions"/> out of the 
+            dependency injection pipeline.
+            </summary>
+            <param name="setupAction">Configuration setup action with <see cref="T:SimplySoft.Core.SendR.Email.Models.EmailOptions"/>.</param>
+        </member>
+        <member name="T:SendR.NotificationConfigurer">
+            <summary>
+            Extensions methods to configure SendR services into application's dependency injection pipeline.
+            </summary>
+        </member>
+        <member name="M:SendR.NotificationConfigurer.ConfigureSendRNotifications(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Adds SendR notification services into the provided <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.
+            </summary>
+            <param name="services">The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> to add SendR services to.</param>
+            <param name="configuration">The <see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/> where the service options are stored.</param>
+            <returns><see cref="T:SimplySoft.Core.SendR.SendRConfigurationBuilder"/> that can be used to further configure SendR services.</returns>
+            <remarks>Use <c>Build()</c> after configuring all SendR services in order to 
+            allow futher chaning other services into this <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.</remarks>
+        </member>
+    </members>
+</doc>

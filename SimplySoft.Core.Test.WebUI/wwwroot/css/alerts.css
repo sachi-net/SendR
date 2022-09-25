@@ -1,0 +1,124 @@
+﻿:root {
+    --banner-success: hsl(133, 64%, 56%);
+    --banner-error: hsl(348, 99%, 60%);
+    --banner-info: hsl(210, 93%, 56%);
+    --banner-warning: hsl(42, 100%, 57%);
+}
+
+/* Banners */
+
+.cn-banner {
+    margin: 0.8rem 0;
+    display: flex;
+    padding: 0.8rem;
+    box-shadow: 0 0 16px 1px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+}
+
+.banner-no-title .banner-info div:first-child {
+    display: none;
+}
+
+.cn-banner .banner-icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 0.5rem;
+    font-size: 1.5rem;
+}
+
+.cn-banner .banner-info {
+    padding-left: 1rem;
+    width: 100%;
+}
+
+    .cn-banner .banner-info div:nth-child(1) {
+        font-weight: 600;
+    }
+
+    .cn-banner .banner-info div:nth-child(2) {
+        font-size: 0.9rem;
+        font-weight: 300;
+    }
+
+.hide-dismiss {
+    display: none !important;
+}
+
+.cn-banner .banner-dismiss {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 1.2rem;
+    padding: 0.5rem;
+    font-weight: 700;
+    color: #777;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+    .cn-banner .banner-dismiss:hover {
+        color: var(--banner-error);
+    }
+
+/* banner types */
+
+.cn-banner-success {
+    border-left: 10px solid var(--banner-success);
+}
+
+    .cn-banner-success .banner-icon {
+        color: var(--banner-success);
+    }
+
+    .cn-banner-success .banner-info div:first-child {
+        color: var(--banner-success);
+    }
+
+.cn-banner-error {
+    border-left: 10px solid var(--banner-error);
+}
+
+    .cn-banner-error .banner-icon {
+        color: var(--banner-error);
+    }
+
+    .cn-banner-error .banner-info div:first-child {
+        color: var(--banner-error);
+    }
+
+.cn-banner-info {
+    border-left: 10px solid var(--banner-info);
+}
+
+    .cn-banner-info .banner-icon {
+        color: var(--banner-info);
+    }
+
+    .cn-banner-info .banner-info div:first-child {
+        color: var(--banner-info);
+    }
+
+.cn-banner-warning {
+    border-left: 10px solid var(--banner-warning);
+}
+
+    .cn-banner-warning .banner-icon {
+        color: var(--banner-warning);
+    }
+
+    .cn-banner-warning .banner-info div:first-child {
+        color: var(--banner-warning);
+    }
+
+/* Dialogs */
+
+.cn-dialog {
+    width: fit-content;
+    padding: 2rem;
+    align-items: center;
+    position: relative;
+    border: 1px solid black;
+    text-align: center;
+    min-width: 280px;
+}

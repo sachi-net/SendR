@@ -1,0 +1,96 @@
+﻿@model SimplySoft.Core.Test.WebUI.Models.StartModel
+
+@{ 
+    ViewData["Title"] = "Start";
+}
+
+
+@if (Model?.ResponseMessage != null)
+{
+    @await Html.PartialAsync("~/Views/Partial/_ResponseMessage.cshtml", Model.ResponseMessage)
+}
+
+<div class="wrapper">
+    <div class="alert alert-info full-width hide">Loading</div>
+    <div class="box">
+        <form method="post" asp-action="Start" asp-controller="Home">
+            <h4>Reset Password</h4>
+            @{
+                switch (Model?.NextStage)
+                {
+                    case 1:
+                        <partial name="~/Views/Partial/_UsernamePrompt.cshtml" model="@Model" />
+                        break;
+                    case 2:
+                        <partial name="~/Views/Partial/_VerifyPrompt.cshtml" model="@Model" />
+                        break;
+                    case 3:
+                        <partial name="~/Views/Partial/_PasswordReset.cshtml" model="@Model" />
+                        break;
+                }
+
+                TempData["Stage"] = Model.NextStage;
+            }
+        </form>
+    </div>
+</div>
+
+@section Styles {
+    <link rel="stylesheet" href="~/lib/animate.css/animate.min.css" />
+}
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+<style>
+    html, body {
+        height: 100%;
+    }
+
+    .hide {
+        display: none;
+    }
+
+    div.container-lg {
+        height: 100%;
+    }
+
+    .full-height {
+        height: 100%;
+    }
+
+    .full-width {
+        width: 100%;
+    }
+
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+    }
+
+    .box {
+        padding: 1.2rem;
+        box-shadow: 0 0 16px 1px rgba(0, 0, 0, 0.2);
+        width: 400px;
+        border-radius: 16px;
+        height: 280px;
+        overflow: hidden;
+    }
+
+        .box h4 {
+            font-weight: 300;
+            text-align: center;
+        }
+
+        .box form div {
+            margin: 0.8rem 0;
+        }
+
+    .right {
+        text-align: right;
+    }
+</style>

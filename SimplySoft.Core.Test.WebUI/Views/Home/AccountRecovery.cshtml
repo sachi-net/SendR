@@ -1,0 +1,63 @@
+﻿@model SimplySoft.Core.Test.WebUI.Models.StartModel
+
+@{
+    ViewData["Title"] = "Account Recovery";
+}
+
+<div class="alert-box">
+    @if (Model.ResponseMessage != null)
+        @await Html.PartialAsync("~/Views/Partial/_Alert.cshtml", Model.ResponseMessage)
+</div>
+
+<div class="login-box">
+    <form method="post" asp-action="AccountRecovery" asp-controller="Home" class="flex-form">
+        @{
+            switch (Model?.NextStage)
+            {
+                case 1:
+                    <partial name="~/Views/Partial/Recovery/_UsernamePrompt.cshtml" model="@Model" />
+                    break;
+                case 2:
+                    <partial name="~/Views/Partial/Recovery/_VerificationPrompt.cshtml" model="@Model" />
+                    break;
+                case 3:
+                    <partial name="~/Views/Partial/Recovery/_NewPassword.cshtml" model="@Model" />
+                    break;
+            }
+
+            TempData["Stage"] = Model.NextStage;
+        }
+    </form>
+</div>
+
+@section Styles {
+    <link rel="stylesheet" href="~/lib/animate.css/animate.min.css" />
+    <link rel="stylesheet" href="~/css/web.ui.css" />
+    <style>
+        .container, .container-lg {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        footer, header {
+            display: none;
+        }
+
+        .alert-box {
+            width: 400px;
+        }
+
+        @@media screen and (max-width: 576px) {
+            .alert-box {
+                width: 90% !important;
+            }
+        }
+    </style>
+}
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
